@@ -405,24 +405,43 @@ body.is-loading{overflow:hidden}
 .about .kick{margin-bottom:12px}
 .ab-line{max-width:760px;font-size:clamp(1.25rem,3vw,2rem);font-weight:800;line-height:1.25;letter-spacing:-.02em}
 .ab-line em{font-style:normal}
-.ab-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:30px;max-width:760px}
-.ab-track::before{content:"";position:absolute;left:5px;right:0;top:5px;height:1px;background:linear-gradient(90deg,#8B7CFF,#5B8DEF,transparent);transform-origin:left;transform:scaleX(0);transition:transform 1.6s ease .2s}
-.about.on .ab-track::before{transform:scaleX(1)}
-.ab-pt{position:relative;padding-top:20px;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
-.about.on .ab-pt{opacity:1;transform:none}
-.about.on .ab-pt:nth-child(2){transition-delay:.5s}.about.on .ab-pt:nth-child(3){transition-delay:.9s}.about.on .ab-pt:nth-child(4){transition-delay:1.3s}
-.ab-pt i{position:absolute;left:0;top:0;width:11px;height:11px;border-radius:50%;background:#8B7CFF;box-shadow:0 0 0 4px rgba(139,124,255,.2),0 0 16px rgba(139,124,255,.8)}
-.ab-pt.now i{background:#5B8DEF;animation:abp 1.8s ease-in-out infinite}
-@keyframes abp{50%{box-shadow:0 0 0 8px rgba(91,141,239,.12),0 0 22px rgba(91,141,239,.9)}}
-.ab-pt b{display:block;font-size:13px;font-weight:900;letter-spacing:.08em}
-.ab-pt span{display:block;margin-top:2px;font-size:11.5px;color:var(--muted)}
-.ab-tick{margin-top:26px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.ab-tick div{display:flex;gap:26px;width:max-content;animation:abt 32s linear infinite}
-.ab-tick span{font-size:10px;font-weight:800;letter-spacing:.28em;color:#8B7CFF;white-space:nowrap}
-.ab-tick span::after{content:"•";margin-left:26px;color:rgba(139,124,255,.5)}
-@keyframes abt{to{transform:translateX(-50%)}}
-@media(max-width:639px){.ab-track{gap:4px}.ab-pt span{font-size:10.5px}}
-@media(prefers-reduced-motion:reduce){.ab-pt,.ab-track::before{opacity:1;transform:none}.loader{display:none}}
+/* design ladder */
+.ab-ladder{position:relative;max-width:560px;margin-top:28px}
+.lad-row{position:relative;display:grid;grid-template-columns:74px 1fr;align-items:stretch;min-height:92px}
+.lad-cell{position:relative;border-left:3px solid #8B7CFF;border-right:3px solid #5B8DEF;background:repeating-linear-gradient(180deg,transparent 0 21px,rgba(139,124,255,.28) 21px 23px);box-shadow:inset 0 0 18px rgba(139,124,255,.08)}
+.lad-row:first-of-type .lad-cell{border-radius:6px 6px 0 0}
+.lad-rung{position:absolute;left:-3px;right:-3px;top:50%;height:8px;margin-top:-4px;border-radius:99px;background:linear-gradient(90deg,#8B7CFF,#5B8DEF);opacity:.22;transform:scaleX(.55);transition:opacity .5s ease var(--d),transform .5s ease var(--d),box-shadow .5s ease var(--d)}
+.about.on .lad-rung{opacity:1;transform:none;box-shadow:0 0 18px rgba(139,124,255,.75)}
+.lad-row.now .lad-rung{background:linear-gradient(90deg,#6F9BFF,#B8D0FF);box-shadow:none}
+.about.on .lad-row.now .lad-rung{box-shadow:0 0 26px rgba(91,141,239,.95)}
+.lad-txt{align-self:center;padding:0 0 0 20px;opacity:0;transform:translateX(-12px);transition:opacity .5s ease var(--d),transform .5s ease var(--d)}
+.about.on .lad-txt{opacity:1;transform:none}
+.lad-txt b{display:block;font-size:12px;font-weight:900;letter-spacing:.1em;color:#B8AFFF}
+.lad-row.now .lad-txt b{color:#8FB2FF}
+.lad-row.now .lad-txt b::after{content:" \2691";font-size:13px}
+.lad-txt span{display:block;margin-top:4px;font-size:14px;font-weight:800;color:#fff}
+.lad-txt small{display:block;margin-top:3px;font-size:10.5px;line-height:1.45;color:var(--muted)}
+.lad-climb{position:absolute;left:37px;bottom:46px;z-index:2;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(139,124,255,.35),0 0 22px #8B7CFF;opacity:0}
+.about.on .lad-climb{opacity:1;animation:ladclimb 2.8s cubic-bezier(.45,.05,.3,1) .3s forwards}
+@keyframes ladclimb{from{bottom:46px}to{bottom:calc(100% - 46px - 14px)}}
+.ab-intro{max-width:760px;margin-top:14px;font-size:13px;line-height:1.65;color:var(--muted)}
+.mq{margin-top:26px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+#mq1{display:flex;gap:10px;width:max-content;animation:mqs 45s linear infinite}
+.mq:hover #mq1{animation-play-state:paused}
+.cf{white-space:nowrap;padding:5px 12px;border:1px solid rgba(139,124,255,.3);border-radius:99px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#B8AFFF;background:rgba(139,124,255,.07)}
+@keyframes mqs{to{transform:translateX(-50%)}}
+.sk-h{margin-top:34px}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 30px;margin-top:14px}
+.sk{position:relative;padding-top:12px;border-top:1px solid rgba(139,124,255,.22)}
+.sk-n{font-size:10px;font-weight:900;letter-spacing:.2em;color:#8B7CFF}
+.sk h3{margin:2px 0 7px;font-size:12.5px;font-weight:900}
+.sk p{display:flex;flex-wrap:wrap;gap:3px 0;font-size:10.5px;line-height:1.5;color:var(--muted)}
+.sk p span:not(:last-child)::after{content:"\00b7";margin:0 6px;color:#8B7CFF}
+@media(max-width:899px){.sk-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:559px){.sk-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#mq1{animation:none}}
+
+@media(prefers-reduced-motion:reduce){#mq1{animation:none}.lad-rung{opacity:1;transform:none}.lad-climb{display:none}.lad-txt{opacity:1;transform:none}}
 </style>
 </head>
 <body class="is-loading">
@@ -515,14 +534,18 @@ body.is-loading{overflow:hidden}
 
 <section class="about rv" id="about">
   <p class="kick">ABOUT ME</p>
-  <p class="ab-line">20 years of making screens feel <em class="grad-text">simple</em>. Ten of them designing products in <em class="grad-text">Dubai</em>.</p>
-  <div class="ab-track">
-    <div class="ab-pt"><i></i><b>2006</b><span>Web design &amp; dev</span></div>
-    <div class="ab-pt"><i></i><b>2016</b><span>UI dev · Dubai</span></div>
-    <div class="ab-pt"><i></i><b>2024</b><span>Product design</span></div>
-    <div class="ab-pt now"><i></i><b>NOW</b><span>Open for freelance</span></div>
+  <p class="ab-intro">I&rsquo;m a Product Designer and UI/UX Designer with 10+ years of experience in product design and UI development, combined with 15+ years of experience in website design, development, hosting, and digital experiences.</p>
+  <div class="ab-ladder" aria-label="Career ladder, climbing from the bottom">
+    <i class="lad-climb"></i>
+    <div class="lad-row now" style="--d:2.50s"><div class="lad-cell"><span class="lad-rung"></span></div><div class="lad-txt"><b>NOW</b><span>Open for freelance</span><small>Design &amp; websites, end to end</small></div></div>
+    <div class="lad-row " style="--d:1.95s"><div class="lad-cell"><span class="lad-rung"></span></div><div class="lad-txt"><b>2024 &ndash; 2026</b><span>Product Designer</span><small>Dubai Technologies (DT) &middot; Full-time, Dubai</small></div></div>
+    <div class="lad-row " style="--d:1.40s"><div class="lad-cell"><span class="lad-rung"></span></div><div class="lad-txt"><b>2016 &ndash; 2024</b><span>UI Developer</span><small>Dubai Technologies (DT) &middot; Full-time, Dubai</small></div></div>
+    <div class="lad-row " style="--d:0.85s"><div class="lad-cell"><span class="lad-rung"></span></div><div class="lad-txt"><b>2014 &ndash; 2016</b><span>Web Developer</span><small>Dimand Design Advertising Agency, JLT Dubai</small></div></div>
+    <div class="lad-row " style="--d:0.30s"><div class="lad-cell"><span class="lad-rung"></span></div><div class="lad-txt"><b>2006 &ndash; 2014</b><span>Datasoft Networks</span><small>Kochi, India</small></div></div>
   </div>
-  <div class="ab-tick" aria-hidden="true"><div><span>GOVERNMENT</span><span>TRANSPORTATION</span><span>TELEMATICS</span><span>FLEET &amp; LOGISTICS</span><span>WASTE MANAGEMENT</span><span>FIGMA</span><span>ADOBE XD</span><span>REACT</span><span>UI/UX</span><span>BRANDING</span><span>GOVERNMENT</span><span>TRANSPORTATION</span><span>TELEMATICS</span><span>FLEET &amp; LOGISTICS</span><span>WASTE MANAGEMENT</span><span>FIGMA</span><span>ADOBE XD</span><span>REACT</span><span>UI/UX</span><span>BRANDING</span></div></div>
+  <div class="mq"><div id="mq1"><span class="cf">Product Design</span><span class="cf">UI/UX</span><span class="cf">Enterprise Applications</span><span class="cf">Mobile &amp; Web</span><span class="cf">Design Systems</span><span class="cf">Dashboards &amp; Data Visualization</span><span class="cf">Responsive Design</span><span class="cf">UI Development</span><span class="cf">WordPress</span><span class="cf">Website Design</span><span class="cf">Website Management</span><span class="cf">Website Hosting</span><span class="cf">Website Maintenance</span><span class="cf">SEO</span><span class="cf">Social Media Management</span><span class="cf">AI-Assisted Design</span><span class="cf">Product Design</span><span class="cf">UI/UX</span><span class="cf">Enterprise Applications</span><span class="cf">Mobile &amp; Web</span><span class="cf">Design Systems</span><span class="cf">Dashboards &amp; Data Visualization</span><span class="cf">Responsive Design</span><span class="cf">UI Development</span><span class="cf">WordPress</span><span class="cf">Website Design</span><span class="cf">Website Management</span><span class="cf">Website Hosting</span><span class="cf">Website Maintenance</span><span class="cf">SEO</span><span class="cf">Social Media Management</span><span class="cf">AI-Assisted Design</span></div></div>
+  <p class="kick sk-h">CORE SKILLS AND TECHNOLOGIES</p>
+  <div class="sk-grid"><div class="sk"><span class="sk-n">01</span><h3>Product Design &amp; UI/UX</h3><p><span>End-to-End Product Design</span><span>User Research</span><span>User Journeys</span><span>Information Architecture</span><span>Wireframing</span><span>Interactive Prototyping</span><span>Usability Testing</span><span>Responsive Web Design</span><span>Mobile App Design</span><span>Enterprise UX</span><span>SaaS Platforms</span><span>Dashboard Design</span><span>Accessibility</span><span>UX Writing</span></p></div><div class="sk"><span class="sk-n">02</span><h3>Design &amp; Creative Tools</h3><p><span>Figma</span><span>Adobe XD</span><span>Adobe Photoshop</span><span>Adobe Illustrator</span><span>Adobe Dreamweaver</span><span>Canva</span><span>Framer</span><span>FigJam</span><span>Zeplin</span></p></div><div class="sk"><span class="sk-n">03</span><h3>AI Design Tools</h3><p><span>ChatGPT</span><span>Claude</span><span>Google Gemini</span><span>Figma AI/Make</span><span>Google Stitch</span><span>Uizard</span><span>Freepik AI</span><span>OpenArt AI</span><span>Adobe Firefly</span><span>Canva AI</span><span>Vercel v0</span><span>Lovable</span></p></div><div class="sk"><span class="sk-n">04</span><h3>Frontend Technologies</h3><p><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React.js</span><span>TypeScript</span><span>Bootstrap</span><span>Tailwind CSS</span><span>Responsive Design</span><span>Component Libraries</span><span>Git</span></p></div><div class="sk"><span class="sk-n">05</span><h3>Design Systems &amp; Collaboration</h3><p><span>Design Tokens</span><span>Component Libraries</span><span>Design Documentation</span><span>Developer Handoff</span><span>Jira</span><span>Confluence</span><span>Notion</span><span>Agile</span><span>Scrum</span><span>Stakeholder Management</span></p></div><div class="sk"><span class="sk-n">06</span><h3>Leadership &amp; Product Strategy</h3><p><span>End-to-End Product Delivery</span><span>Design Leadership</span><span>Team Mentoring</span><span>Product Discovery</span><span>Design Reviews</span><span>Cross-Functional Collaboration</span><span>Requirements Analysis</span><span>Enterprise and Government Digital Platforms</span></p></div><div class="sk"><span class="sk-n">07</span><h3>SEO &amp; Website Management</h3><p><span>Search Engine Optimization (SEO)</span><span>On-Page SEO</span><span>Technical SEO Fundamentals</span><span>Keyword Research</span><span>Meta Titles and Descriptions</span><span>Website Optimization</span><span>Website Content Updates</span><span>Website Maintenance</span><span>Google Analytics</span><span>Google Search Console</span><span>Search Engine Ranking Improvement</span></p></div><div class="sk"><span class="sk-n">08</span><h3>Social Media &amp; Digital Marketing</h3><p><span>Social Media Account Management</span><span>Social Media Content Planning</span><span>Content Creation</span><span>Graphic Design for Social Media</span><span>Digital Marketing Campaigns</span><span>Brand Awareness</span><span>Social Media Post Design</span><span>Campaign Creatives</span><span>Audience Engagement</span><span>Digital Content Management</span><span>Performance Monitoring</span></p></div><div class="sk"><span class="sk-n">09</span><h3>Web &amp; Content Management</h3><p><span>WordPress</span><span>Website Design and Maintenance</span><span>Landing Page Design</span><span>Content Management Systems (CMS)</span><span>Website Hosting Fundamentals</span></p></div></div>
 </section>
 
 <section class="contact rv" id="contact">
